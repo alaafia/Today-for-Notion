@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Notion Today settings</title><link rel="stylesheet" href="options.css"></head>
+<body>
+  <h1>Notion Today <span class="credit">Made by fofo 🔥</span></h1>
+
+  <section>
+    <h2>1. Connect Notion</h2>
+    <ol>
+      <li>Open <a href="https://www.notion.so/profile/integrations" target="_blank">notion.so/profile/integrations</a> and create an <b>internal</b> integration.</li>
+      <li>Copy its <b>Internal Integration Secret</b> and paste it below.</li>
+      <li>In Notion, open each database you want to use, click <code>•••</code>, then <b>Connections</b>, and add your integration.</li>
+    </ol>
+    <label>Integration secret <input id="token" type="password" placeholder="ntn_…" autocomplete="off"></label>
+  </section>
+
+  <section>
+    <h2>2. Databases</h2>
+    <p class="muted">
+      <b>Day headers in pages</b>: each row is a page (a project, a plan) with a date range. Inside, lines like
+      <code>Wed 18</code>, <code>Tue 1 Dec</code> or <code>2026-11-18</code> are followed by checkboxes. The popup shows the checkboxes under today's line.<br>
+      <b>Task rows</b>: each row is a task. The popup shows rows whose date is today.
+    </p>
+    <div id="sources"></div>
+    <button id="add" class="secondary">+ Add database</button>
+  </section>
+
+  <div class="bar">
+    <button id="save">Save</button>
+    <button id="test" class="secondary">Test connection</button>
+    <span id="status"></span>
+  </div>
+
+  <template id="tpl">
+    <fieldset class="source">
+      <div class="row">
+        <label class="grow">Database URL or ID <input name="dbId" placeholder="https://www.notion.so/…"></label>
+        <label>Mode
+          <select name="mode">
+            <option value="headers">Day headers in pages</option>
+            <option value="rows">Task rows</option>
+          </select>
+        </label>
+      </div>
+      <details>
+        <summary>Advanced (property names, leave empty to auto detect)</summary>
+        <div class="row">
+          <label>Date property <input name="dateProp" placeholder="auto"></label>
+          <label>Status or checkbox property <input name="statusProp" placeholder="auto"></label>
+        </div>
+        <div class="row">
+          <label>Done value <input name="doneValue"></label>
+          <label>Not done value <input name="todoValue"></label>
+        </div>
+      </details>
+      <div class="row end"><span class="info muted"></span><button class="remove link">Remove</button></div>
+    </fieldset>
+  </template>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
